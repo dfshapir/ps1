@@ -1,11 +1,29 @@
 ---
-title: "ps1"
+title: "Problem Set 1"
+subtitle: "Daniel Shapiro"
 output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(6800)
 library(tidyverse)
 library(stats)
 ```
 
+### 1a: What is the overall probability of being born in August?
+
+```{r 1a}
+# First, let's define what we already know.
+P( )
+```
+
+### 1b: What is P(Name=$Gus$|Man born in August)? That is, conditional on being born in August, what is the probability that a man is named Gus?
+
+### 1c: What is P(Name=$Gus$|Man born in July)?
+
+### 1d: Imagine that there are 600 men born in 1982. Given the conditions above, what is the probability that at least two baby $Guses$ are born on August 1, 1982? 
+
+### 1e: What is the probability that at least two baby $Hugos$ are born on August 1, 1982?
+
+### 1f: Given your answers to (d) and (e), what would you say to a pundit who pointed to two $Guses$ with the same August 1, 1982 birthday as evidence of voter fraud in the form of double voting? What would you say to a pundit who pointed to two $Hugos$ with the same August 1, 1982 birthday as evidence of voter fraud in the form of double voting?
