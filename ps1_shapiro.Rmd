@@ -10,20 +10,34 @@ set.seed(6800)
 library(tidyverse)
 library(stats)
 ```
+First, let's define what we already know: 
+
+P(Man born in August|Gus) = P(A|G) = $\frac{3}{20}$
+P(G) = $\frac{1}{2}$
+P(A) = $\frac{1}{12}$
 
 ### 1a: What is the overall probability of being born in August?
 
-```{r 1a}
-# First, let's define what we already know.
-P( )
-```
+$\frac{1}{12}$: We already know that all months are equally likely. 
 
 ### 1b: What is P(Name=$Gus$|Man born in August)? That is, conditional on being born in August, what is the probability that a man is named Gus?
 
+By Bayes' Rule, we know that P(A|B) = $\frac{P(B|A)*P(A)}{P(B)}$. So here, we can do P(G|A) = $\frac{P(A|G)*P(G)}{P(A)}$ = $\frac{\frac{3}{20}*\frac{1}{2}}{\frac{1}{12}}$ = $\frac{\frac{3}{40}}{\frac{1}{12}}$ = $\frac{36}{40}$ = $\frac{9}{10}$ = 90%.
+
 ### 1c: What is P(Name=$Gus$|Man born in July)?
+
+If we assume that in each month other than August, "Gus"es are spread out evenly, then we can say the following: if the likelihood of a "Gus" being born in August is 15% ($\frac{3}{20}$), the likelihood for the rest of the year is ($\frac{17}{20}$). Then, divided by the remaining 11 months, we get ($\frac{17}{220}$). We can write this as P(J|G), or the probability that a man was born in July, given that his name is Gus. This gives us enough information to use Bayes' Rule again:
+
+\begin{center}
+
+P(G|J) = $\frac{P(J|G)*P(G)}{P(J)}$ = $\frac{\frac{17}{220}*\frac{1}{2}}{\frac{1}{12}}$ = $\frac{\frac{17}{440}}{\frac{1}{12}}$ = $\frac{204}{440}$ = 46.36%.
+
+\end{center}
 
 ### 1d: Imagine that there are 600 men born in 1982. Given the conditions above, what is the probability that at least two baby $Guses$ are born on August 1, 1982? 
 
 ### 1e: What is the probability that at least two baby $Hugos$ are born on August 1, 1982?
 
 ### 1f: Given your answers to (d) and (e), what would you say to a pundit who pointed to two $Guses$ with the same August 1, 1982 birthday as evidence of voter fraud in the form of double voting? What would you say to a pundit who pointed to two $Hugos$ with the same August 1, 1982 birthday as evidence of voter fraud in the form of double voting?
+
+I think that one cannot "conclude" anything either way, but there's a much higher chance that there are two Guses who were born on that day than that there are two Hugos.
