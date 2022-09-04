@@ -125,10 +125,40 @@ Thus, we can use Bayes' Rule. $P(PNX|2CNX) = \frac{1*\frac{2}{3}}{\frac{54}{75}}
 
 *Based on my simulation:*
 
-```{r question_3}
-parent <- c(1, 2, 3)
+```{r question_3, warning = FALSE}
+
+set.seed(6800)
+parent <- sample(0:1, size = 1000, replace = TRUE, prob = c((2/3), (1/3)))
+
+# I have already set my seed to 6800 in my initial chunk, but I did it again just to be on the 
+#safe side. I also turned off the warning because sometimes I'd get some very lengthy ones 
+#that would just slow things down and not change anything. I sample between 0 and 1 and put 
+#replace to TRUE; otherwise I'd just have two values. Size is 1000 (size of the vector) and 
+#the probability of being non-xenophobic (labeled as 0) is 2/3 for the parent. The 
+#probability of being xenophobic (labeled as 1) is 1/3.
+
+child1 <- c(rep(1, 1000))
+child2 <- c(rep(1, 1000))
+
+# Created two empty vectors with all values of one, then bound them together 
+#into a data frame.
+
+families <- data.frame(parent, child1, child2)
+
+# Below are the conditions that the problem required. Equations for both kids are the 
+#same, although the results may not be. 
+
+for(i in 1:1000) {
+  if(families$parent[i] == 0){
+    families$child1[i] <- sample(c(0, 1), replace = TRUE, prob = c(1, 0))}
+  else{families$child1[i] <- sample(c(0, 1), replace = TRUE, prob = c(.4, .6))}
+  }
+
+for(i in 1:1000) {
+    if(families$parent[i] == 0){
+    families$child2[i] <- sample(c(0, 1), replace = TRUE, prob = c(1, 0))}
+  else{families$child2[i] <- sample(c(0, 1), replace = TRUE, prob = c(.4, .6))}
+}
 ```
 
 ### 3a: What is the proportion of families in which no child holds the political attitude? 
-
-My answer will eventually be here. 
