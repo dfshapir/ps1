@@ -162,3 +162,55 @@ for(i in 1:1000) {
 ```
 
 ### 3a: What is the proportion of families in which no child holds the political attitude? 
+
+To figure this one out, first, I filtered out all of the values in which families$parent == 0, because we know that if the parent is non-xenophobic, the kid will not be xenophobic either. Then, I just kept the instances in which both child1 and child2 equaled 0, which left me with 63 families. The proportion, thus, is **63/1000, or 0.063, or 6.3%.**
+
+```{r 3a}
+threea <- families %>%
+  filter(parent != 0) %>%
+  filter(child1 == 0) %>%
+  filter(child2 == 0)
+
+print(nrow(threea)/nrow(families))
+```
+
+### 3b: Among families with an elder child who is not xenophobic, what proportion of parents are xenophobic?
+
+Again, this is straightforward to do with filter(). First, I filtered out the instances where the elder child (child1) was xenophobic. I saved that as a separate dataframe because I knew I would have to use it later. Then I only kept instances where the parent was xenophobic and saved that. The final proportion came out to **145/790, or .184, or about 18.4%.**
+
+```{r 3b}
+threeb <- families %>% 
+  filter(child1 == 0) 
+
+threebctd <- threeb %>%
+  filter(parent == 1)
+
+print(nrow(threebctd)/nrow(threeb))
+```
+
+### 3c: Among families where no child is xenophobic, what is the proportion of families where the parent is also not xenophobic?
+
+The setup for 3c is very similar to that of 3b, as you can see below. The final proportion came out to **645/708, or .911, or about 91.1%.**
+
+```{r 3c}
+threec <- families %>% 
+  filter(child1 == 0) %>%
+  filter(child2 == 0)
+
+threecctd <- threec %>%
+  filter(parent == 0)
+
+print(nrow(threecctd)/nrow(threec))
+```
+
+### 3d: Is whether the elder child xenophobic independent of whether the younger child is xenophobic?
+
+**Yes.** Both loops were created based off of the "parent" vector, and the code for each of them does not depend on the other, simply on the "parent" vector.
+
+### 3e: Conditional on the parent's attitude, is the elder child independent of the younger child?
+
+**Yes,** the elder child is still independent. The sampling procedures for the elder child only referenced "parent" and "child1," and the sampling procedures for the younger child only referenced "parent" and "child2." You can tell that the two columns "child1" and "child2" are different even though the code to create the two columns is essentially identical; however, I believe that this is due more to R's algorithms than the ways in which the loops are set up.
+
+### How well do these simulation results match with the analytic results in Problem 2 above?
+
+For the most part, they are very similar -- not exactly the same, but very similar. It makes sense that they are not exactly the same; after all, this is meant to be a random sample. 
