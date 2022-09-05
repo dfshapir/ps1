@@ -175,7 +175,7 @@ for(i in 1:1000) {
 
 ### 3a: What is the proportion of families in which no child holds the political attitude? 
 
-To figure this one out, first, I filtered out all of the values in which families$parent == 0, because we know that if the parent is non-xenophobic, the kid will not be xenophobic either. Then, I just kept the instances in which both child1 and child2 equaled 0, which left me with 63 families. The proportion, thus, is **63/1000, or 0.063, or 6.3%.**
+I read this question as asking "no child holds the political attitude *of the parent*." So to figure this one out, first, I filtered out all of the values in which families$parent == 0, because we know that if the parent is non-xenophobic, the kid will not be xenophobic either. Then, I just kept the instances in which both child1 and child2 equaled 0, which left me with 63 families. The proportion, thus, is **63/1000, or 0.063, or 6.3%.**
 
 ```{r 3a}
 threea <- families %>%
