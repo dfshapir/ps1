@@ -217,11 +217,138 @@ print(nrow(threecctd)/nrow(threec))
 
 ### 3d: Is whether the elder child xenophobic independent of whether the younger child is xenophobic?
 
-**Yes.** Both loops were created based off of the "parent" vector, and the code for each of them does not depend on the other, simply on the "parent" vector.
+Here, we have to do the same things as 2d. We do: Does P($A \bigcap B$) = P(A) * P(B)? But we use the data we got from our sampling endeavor, instead of the original stuff. We will define A as $C_1$X, which is comprised of {(PX, $C_1$X, $C_2$X), (PX, $C_1$X, $C_2$NX),(PNX, $C_1$X, $C_2$X), (PNX, $C_1$X, $C_2$NX)}. Then, we can use filter() to determine the number of instances of each in our data and divide them by 1000 to determine what R gives us.
+
+Then we take P(B). We will define B as $C_2$X, which is comprised of {(PX, $C_1$X, $C_2$X), (PX, $C_1$NX, $C_2$X), (PNX, $C_1$X, $C_2$X), (PNX, $C_1$NX, $C_2$X)}. The last two are impossible given our parameters, so we can filter for only the first two potential outcomes. 
+
+As we can see below, P(A)*P(B) = .045. 
+
+```{r 3d}
+# First, P(A). 
+
+# First on P(A): (PX, $C_1$X, $C_2$X):
+
+threeda <- families %>%
+  filter(parent == 1) %>%
+  filter(child1 == 1) %>%
+  filter(child1 == 1) %>%
+  nrow()
+
+# Second, (PX, $C_1$X, $C_2$NX)
+
+threedb <- families %>%
+  filter(parent == 1) %>%
+  filter(child1 == 1) %>%
+  filter(child1 == 0) %>%
+  nrow()
+
+pa <- ((threedb + threeda)/1000)
+
+# This gives us 21%. The other two options have a probability of 0.
+
+# Next, P(B). 
+
+# First on P(B): (PX, $C_1$X, $C_2$X)
+
+threedc <- families %>%
+  filter(parent == 1) %>%
+  filter(child1 == 1) %>%
+  filter(child2 == 1) %>%
+  nrow()
+
+# Next: (PX, $C_1$NX, $C_2$X)
+
+threedd <- families %>%
+  filter(parent == 1) %>%
+  filter(child1 == 0) %>%
+  filter(child2 == 1) %>%
+  nrow()
+
+pb <- ((threedc + threedd)/1000)
+
+pa*pb
+```
+
+Now, we need to see if this is equal to P($A \bigcap B$). ($A \bigcap B$) = {(PX, $C_1$X, $C_2$X), (PNX, $C_1$X, $C_2$X)}. The second outcome is impossible, so P($A \bigcap B$), according to our simulation, equals .132:
+
+```{r 3dctd}
+threedint <- families %>%
+  filter(parent == 1) %>%
+  filter(child1 == 1) %>%
+  filter(child2 == 1) %>%
+  nrow()
+
+threedint/1000
+```
+
+.132 and .045 are not equal to one another, so **NO**, they are not independent.
 
 ### 3e: Conditional on the parent's attitude, is the elder child independent of the younger child?
 
-**Yes,** the elder child is still independent. The sampling procedures for the elder child only referenced "parent" and "child1," and the sampling procedures for the younger child only referenced "parent" and "child2." You can tell that the two columns "child1" and "child2" are different even though the code to create the two columns is essentially identical; however, I believe that this is due more to R's algorithms than the ways in which the loops are set up.
+For this question, I just removed the sets from the sample space in which the parent was NOT xenophobic. Thus, I ended up with a sample space of: 
+
+{(PX, $C_1$X, $C_2$X), (PX, $C_1$X, $C_2$NX), (PX, $C_1$NX, $C_2$X), (PX, $C_1$NX, $C_2$NX)}
+
+In R:
+
+```{r 3e}
+threee <- families %>%
+  filter(parent == 1)
+
+nrow(threee)
+```
+
+Note that now we are dividing by 355 instead of 1000.
+
+Now, same formula: Does Does P($A \bigcap B$) = P(A) * P(B)?
+
+A is defined as $C_1$X, which is comprised of {(PX, $C_1$X, $C_2$X), (PX, $C_1$X, $C_2$NX)}. Since PX is now 100%, we can remove that from the probability, and only focus on working with the other probabilities. Here, our expression will look like: 
+
+```{r 3ectd}
+threeea <- threee %>%
+  filter(child1 == 1) %>%
+  filter(child2 == 1) %>%
+  nrow()
+
+threeeb <- threee %>%
+  filter(child1 == 1) %>%
+  filter(child2 == 0) %>%
+  nrow()
+
+pa <- ((threeea + threeeb)/355)
+```
+
+Next, B is defined as $C_2$X, which is comprised of {(PX, $C_1$X, $C_2$X), (PX, $C_1$NX, $C_2$X)}. Our expression will look like: 
+
+```{r 3ectd2}
+threeec <- threee %>%
+  filter(child1 == 1) %>%
+  filter(child2 == 1) %>%
+  nrow()
+
+threeed <- threee %>%
+  filter(child1 == 0) %>%
+  filter(child2 == 1) %>%
+  nrow()
+
+pb <- ((threeec + threeed)/355)
+
+pa*pb
+```
+
+
+($A \bigcap B$) for this smaller sample space, meanwhile, is {(PX, $C_1$X, $C_2$X)}. P($A \bigcap B$) thus equals:
+
+```{r refinal}
+threeefinal <- threee %>%
+  filter(child1 == 1) %>%
+  filter(child2 == 1) %>%
+  nrow()
+
+threeefinal/355
+```
+
+This is difficult to tell. They are APPROXIMATELY equal, and considering this is from sampled data, and we know that arithmetically the two numbers should be the same (.36 and .36, as shown in 2E), we can say that it is *probably* (not a technical term!) equal. By this logic and this set of assumptions, we can say that **NO, they are probably not independent** given these conditions.
 
 ### How well do these simulation results match with the analytic results in Problem 2 above?
 
