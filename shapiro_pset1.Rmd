@@ -40,9 +40,9 @@ By Bayes' Rule, we know that P(A|B) = $\frac{P(B|A)*P(A)}{P(B)}$. So here, we ca
 
 ### 1c: What is P(Name=$Gus$|Man born in July)?
 
-If we assume that in each month other than August, "Gus"es are spread out evenly, then we can say the following: if the likelihood of a "Gus" being born in August is 15% ($\frac{3}{20}$), the likelihood for the rest of the year is ($\frac{17}{20}$). Then, divided by the remaining 11 months, we get ($\frac{17}{220}$). We can write this as P(J|G), or the probability that a man was born in July, given that his name is Gus. This gives us enough information to use Bayes' Rule again:
+If we assume that in each month other than August, "Gus"es are spread out evenly, then we can say the following: if the likelihood of a Gus being born in August is 15% ($\frac{3}{20}$), the likelihood for the rest of the year is ($\frac{17}{20}$). Then, divided by the remaining 11 months, we get ($\frac{17}{220}$). We can write this as P(J|G), or the probability that a man was born in July, given that his name is Gus. This gives us enough information to use Bayes' Rule again:
 
-P(G|J) = $\frac{P(J|G)*P(G)}{P(J)}$ = $\frac{\frac{17}{220}*\frac{1}{2}}{\frac{1}{12}}$ = $\frac{\frac{17}{440}}{\frac{1}{12}}$ = $\frac{204}{440}$ = 46.36%.
+<div align="center">P(G|J) = $\frac{P(J|G)*P(G)}{P(J)}$ = $\frac{\frac{17}{220}*\frac{1}{2}}{\frac{1}{12}}$ = $\frac{\frac{17}{440}}{\frac{1}{12}}$ = $\frac{204}{440}$ = 46.36%.</div>
 
 ### 1d: Imagine that there are 600 men born in 1982. Given the conditions above, what is the probability that at least two baby $Guses$ are born on August 1, 1982? 
 
@@ -50,13 +50,13 @@ First, 600/12 is 50. So we can assume that 50 men were likely born in August. Of
 
 We can get the probability by doing $(1-Aug1)^c$. The inverse of there being two or more Guses is there being either one or zero Guses born on that day. We can add those together:
 
-$\frac{30}{31}^{45} + 45(\frac{1}{31}(\frac{30}{31}^{44})$. This equals .428, or about 43%.
+$\frac{30}{31}^{45} + 45(\frac{1}{31}(\frac{30}{31})^{44})$. This equals .571. 1-.571 = .428, or about a 43% chance.
 
 ### 1e: What is the probability that at least two baby $Hugos$ are born on August 1, 1982?
 
 We take a similar process here. Out of the 50 men that were born in August, we know that there is a 10% chance that the baby will be named Hugo. So we can assume that we have 5 Guses. Thus, here we can do the same process as 1d), but with 5 instead of 45:
 
-$\frac{30}{31}^{5} + 5(\frac{1}{31}(\frac{30}{31}^{4})$. This equals about .009, or essentially a 1% chance.
+$\frac{30}{31}^{5} + 5(\frac{1}{31}(\frac{30}{31})^{4})$. This equals about .990. 1-.990 = .001, or essentially a 1% chance.
 
 ### 1f: Given your answers to (d) and (e), what would you say to a pundit who pointed to two $Guses$ with the same August 1, 1982 birthday as evidence of voter fraud in the form of double voting? What would you say to a pundit who pointed to two $Hugos$ with the same August 1, 1982 birthday as evidence of voter fraud in the form of double voting?
 
@@ -81,7 +81,7 @@ So, defining what we already know:
 
 The sample space is: {(PX, $C_1$X, $C_2$X), (PX, $C_1$X, $C_2$NX), (PX, $C_1$NX, $C_2$X), (PX, $C_1$NX, $C_2$NX), (PNX, $C_1$NX, $C_2$NX)}
 
-Also, I know these are not possible, but there are also technically three more combinations with a probability of 0: {(PNX, $C_1$X, $C_2$X), (PNX, $C_1$X, $C_2$NX), (PNX, $C_1$NX, $C_2$X)}. I included them because it felt strange not to.
+Also, I know these are not possible, but there are also technically three more combinations with a probability of 0: {(PNX, $C_1$X, $C_2$X), (PNX, $C_1$X, $C_2$NX), (PNX, $C_1$NX, $C_2$X)}. I included them because it felt strange not to, and I include them in my answers for the remaining questions when applicable as well just for procedural purposes.
 
 ### 2b: What is the probability that the younger child is xenophobic if their parent is xenophobic?
 
@@ -348,7 +348,7 @@ threeefinal <- threee %>%
 threeefinal/355
 ```
 
-This is difficult to tell. They are APPROXIMATELY equal, and considering this is from sampled data, and we know that arithmetically the two numbers should be the same (.36 and .36, as shown in 2E), we can say that it is *probably* (not a technical term!) equal. By this logic and this set of assumptions, we can say that **NO, they are probably not independent** given these conditions.
+This is difficult to tell. .3566 and .3718 are APPROXIMATELY equal, and considering this is from sampled data, and we know that arithmetically the two numbers should be the same (.36 and .36, as shown in 2E), we can say that it is *probably* (not a technical term!) equal. By this logic and this set of assumptions, we can say that **NO, they are probably not independent** given these conditions.
 
 ### How well do these simulation results match with the analytic results in Problem 2 above?
 
