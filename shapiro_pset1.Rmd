@@ -46,11 +46,21 @@ P(G|J) = $\frac{P(J|G)*P(G)}{P(J)}$ = $\frac{\frac{17}{220}*\frac{1}{2}}{\frac{1
 
 ### 1d: Imagine that there are 600 men born in 1982. Given the conditions above, what is the probability that at least two baby $Guses$ are born on August 1, 1982? 
 
+First, 600/12 is 50. So we can assume that 50 men were likely born in August. Of those, we know that there is a 90% chance that the baby will be named Gus. So we can assume that we have 45 Guses. We also know that there is a 1/31 chance of being born on any given day (days are spread evenly). 
+
+We can get the probability by doing $(1-Aug1)^c$. The inverse of there being two or more Guses is there being either one or zero Guses born on that day. We can add those together:
+
+$\frac{30}{31}^{45} + 45(\frac{1}{31}(\frac{30}{31}^{44})$. This equals .428, or about 43%.
+
 ### 1e: What is the probability that at least two baby $Hugos$ are born on August 1, 1982?
+
+We take a similar process here. Out of the 50 men that were born in August, we know that there is a 10% chance that the baby will be named Hugo. So we can assume that we have 5 Guses. Thus, here we can do the same process as 1d), but with 5 instead of 45:
+
+$\frac{30}{31}^{5} + 5(\frac{1}{31}(\frac{30}{31}^{4})$. This equals about .009, or essentially a 1% chance.
 
 ### 1f: Given your answers to (d) and (e), what would you say to a pundit who pointed to two $Guses$ with the same August 1, 1982 birthday as evidence of voter fraud in the form of double voting? What would you say to a pundit who pointed to two $Hugos$ with the same August 1, 1982 birthday as evidence of voter fraud in the form of double voting?
 
-I think that one cannot "conclude" anything either way, but there's a much higher chance that there are two Guses who were born on that day than that there are two Hugos.
+I think that one cannot "conclude" anything either way, but there's a MUCH higher chance that there are two Guses who were born on that day than that there are two Hugos. Thus, if there are two Hugos there is a much higher chance that there is voter fraud.
 
 ### Question 2 Background:
 
@@ -69,7 +79,9 @@ So, defining what we already know:
 
 ### 2a: What is the sample space for this experiment?
 
-The sample space is: {(PX, $C_1$X, $C_2$X), (PX, $C_1$X, $C_2$NX), (PX, $C_1$NX, $C_2$X), (PX, $C_1$NX, $C_2$NX), (PNX, $C_1$X, $C_2$X), (PNX, $C_1$X, $C_2$NX), (PNX, $C_1$NX, $C_2$X), (PNX, $C_1$NX, $C_2$NX)}
+The sample space is: {(PX, $C_1$X, $C_2$X), (PX, $C_1$X, $C_2$NX), (PX, $C_1$NX, $C_2$X), (PX, $C_1$NX, $C_2$NX), (PNX, $C_1$NX, $C_2$NX)}
+
+Also, I know these are not possible, but there are also technically three more combinations with a probability of 0: {(PNX, $C_1$X, $C_2$X), (PNX, $C_1$X, $C_2$NX), (PNX, $C_1$NX, $C_2$X)}. I included them because it felt strange not to.
 
 ### 2b: What is the probability that the younger child is xenophobic if their parent is xenophobic?
 
